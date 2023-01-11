@@ -11,6 +11,8 @@ namespace MyPharmacyWebAPI.Controllers
     [ApiController]
     public class PharmacySearchController : ControllerBase
     {
+
+        [HttpGet]
         public string Get()
         {
             //simharaju's task
