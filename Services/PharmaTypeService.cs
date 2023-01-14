@@ -19,10 +19,12 @@ namespace MyPharmacyWebAPI.Services
 
             _oPharmaTypes = new List<PharmaType>();
 
+            var procedureName = "get_pharmaType";
+            
             using (IDbConnection con = new SqlConnection(Global.ConnectionString))
             {
                 if (con.State == System.Data.ConnectionState.Closed) con.Open();
-                var oPharmaTypes = con.Query<PharmaType>("select * from pharmatype").ToList();
+                var oPharmaTypes = con.Query<PharmaType>(procedureName,commandType: CommandType.StoredProcedure).ToList();
 
                 if (oPharmaTypes != null && oPharmaTypes.Count() > 0)
                 {
