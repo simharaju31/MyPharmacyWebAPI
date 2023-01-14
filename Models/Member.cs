@@ -8,9 +8,13 @@ namespace MyPharmacyWebAPI.Models
     public class Member
     {
         //create a member class same as database table
-        public int memberId { get; set; }
+        public int MemberId { get; set; }
 
-        public string memberName { get; set; }
+        public string Name { get; set; }
+
+        public string State { get; set; }
+        public string City { get; set; }
+        public int Pincode { get; set; }
 
     }
 }

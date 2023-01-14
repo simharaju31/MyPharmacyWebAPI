@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MyPharmacyWebAPI.Common;
+using MyPharmacyWebAPI.IServices;
+using MyPharmacyWebAPI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +29,13 @@ namespace MyPharmacyWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSingleton<IConfiguration>(Configuration);
+            Global.ConnectionString = Configuration.GetConnectionString("MyPharmaDb");
+
+            services.AddScoped<IMemberService, MemberService>();
+            services.AddScoped<IPharmaTypeService, PharmaTypeService>();
+
             services.AddMvc();
             services.AddSwaggerGen(c=> new OpenApiInfo
             {

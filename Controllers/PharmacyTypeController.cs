@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyPharmacyWebAPI.IServices;
+using MyPharmacyWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +13,22 @@ namespace MyPharmacyWebAPI.Controllers
     [ApiController]
     public class PharmacyTypeController : ControllerBase
     {
+
+        private IPharmaTypeService _oPharmaTypeService;
+
+        public PharmacyTypeController(IPharmaTypeService oPharmaTypeService)
+        {
+            _oPharmaTypeService = oPharmaTypeService;
+        }
+
         [HttpGet]
-        public string get()
+        public List<PharmaType> get()
         {
             //sub task in harika's major task
             //write the code to get the pharma types availale in pharmatype table in database
             //execute the storage procedure using the dapper library
 
-            return " return type like retail,ltc... something which will be there in database";
+            return _oPharmaTypeService.Gets();
         }
     }
 }
