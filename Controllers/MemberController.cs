@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyPharmacyWebAPI.IServices;
+using MyPharmacyWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +13,16 @@ namespace MyPharmacyWebAPI.Controllers
     [ApiController]
     public class MemberController : ControllerBase
     {
+
+        private IMemberService _oMemberService;
+
+        public MemberController(IMemberService oMemberService)
+        {
+            _oMemberService = oMemberService;
+        }
+
         [HttpGet]
-        public String Get(int memberId)
+        public Member Get(int memberId)
         {
             //harika task
 
@@ -20,7 +30,8 @@ namespace MyPharmacyWebAPI.Controllers
             //refer to model class that i created in model folder.
             //execute the storage procedure using the dapper library
 
-            return "bhavesh"+" "+ memberId;            
+
+            return _oMemberService.Get(memberId);            
         }
     }
 }
