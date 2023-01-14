@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyPharmacyWebAPI.IServices;
+using MyPharmacyWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +14,20 @@ namespace MyPharmacyWebAPI.Controllers
     public class PharmacySearchController : ControllerBase
     {
 
+        private IPharmacySearchService _oPharmacySearchService;
+
+        public PharmacySearchController(IPharmacySearchService oPharmacySearchService)
+        {
+            _oPharmacySearchService = oPharmacySearchService;
+        }
+
+
         [HttpGet]
-        public string Get()
+        public List<Pharmacy> Get(string characteristics,string type, string city,string state, int pincode)
         {
             //simharaju's task
 
-
-            return "the list of pharmacies";
+            return _oPharmacySearchService.PharmacySearch(characteristics, type, city, state, pincode);
 
         }
     }
