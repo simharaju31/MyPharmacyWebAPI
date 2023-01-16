@@ -36,6 +36,8 @@ namespace MyPharmacyWebAPI
             services.AddScoped<IMemberService, MemberService>();
             services.AddScoped<IPharmaTypeService, PharmaTypeService>();
             services.AddScoped<IPharmacySearchService, PharmacySearchService>();
+            services.AddScoped<ISavePharmacyService, SavePharmacyService>();
+
 
             services.AddMvc();
             services.AddSwaggerGen(c=> new OpenApiInfo

@@ -5,10 +5,16 @@ using System.Threading.Tasks;
 
 namespace MyPharmacyWebAPI.Models
 {
-    public class searchCriteria
+    public class SearchCriteria
     {
-        public string homeAdress { get; set; }
+        public string Characteristics { get; set; }
 
-        public string characteristics { get; set; }
+        public string Type { get; set; }
+
+        public string City { get; set; }
+
+        public string State { get; set; }
+
+        public string Pincode { get; set; }
     }
 }
