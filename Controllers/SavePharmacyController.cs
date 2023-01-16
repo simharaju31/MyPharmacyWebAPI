@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyPharmacyWebAPI.IServices;
+using MyPharmacyWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,18 @@ namespace MyPharmacyWebAPI.Controllers
     [ApiController]
     public class SavePharmacyController : ControllerBase
     {
-       
+
+        private ISavePharmacyService _oSavePharmacyService;
+
+        public SavePharmacyController(ISavePharmacyService oSavePharmacyService)
+        {
+            _oSavePharmacyService = oSavePharmacyService;
+        }
+
+
 
         [HttpPost]
-        public string Post(int memberId,string pharmacyId)
+        public List<SavePharmacy> Post([FromBody] SavePharmacy savePharmacy)
         {
             //shilpi's task
 
@@ -26,7 +36,7 @@ namespace MyPharmacyWebAPI.Controllers
             //and return nothing
 
 
-            return "shilpi" +" " + memberId + " " + pharmacyId;
+            return _oSavePharmacyService.Save(savePharmacy);
         }
     }
 }
