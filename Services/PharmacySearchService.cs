@@ -14,7 +14,7 @@ namespace MyPharmacyWebAPI.Services
     public class PharmacySearchService : IPharmacySearchService
     {
         List<Pharmacy> _oPharmacies = new List<Pharmacy>();
-        public  List<Pharmacy> PharmacySearch(string characteristics, string type, string city, string state, int pincode)
+        public  List<Pharmacy> PharmacySearch(string characteristics, string type, string city, string state, string pincode)
         {
             _oPharmacies = new List<Pharmacy>();
 
@@ -24,21 +24,29 @@ namespace MyPharmacyWebAPI.Services
             parameters.Add("@pharmatypeId", type, DbType.String, ParameterDirection.Input);
             parameters.Add("@city", city, DbType.String, ParameterDirection.Input);
             parameters.Add("@state", state, DbType.String, ParameterDirection.Input);
-            parameters.Add("@pincode", pincode, DbType.Int32, ParameterDirection.Input);
-
-            using (IDbConnection con = new SqlConnection(Global.ConnectionString))
+            parameters.Add("@pincode", pincode, DbType.String, ParameterDirection.Input);
+            try
             {
-                if (con.State == System.Data.ConnectionState.Closed) con.Open();
-                var oPharmacies = con.Query<Pharmacy>(procedureName, parameters, commandType: CommandType.StoredProcedure).ToList();
-
-
-                if (oPharmacies != null && oPharmacies.Count() > 0)
+                using (IDbConnection con = new SqlConnection(Global.ConnectionString))
                 {
-                    _oPharmacies = oPharmacies;
-                }
+                    if (con.State == System.Data.ConnectionState.Closed) con.Open();
+                    var oPharmacies = con.Query<Pharmacy>(procedureName, parameters, commandType: CommandType.StoredProcedure).ToList();
 
-                return _oPharmacies;
+
+                    if (oPharmacies != null && oPharmacies.Count() > 0)
+                    {
+                        _oPharmacies = oPharmacies;
+                    }
+
+                    return _oPharmacies;
+                }
             }
+            catch (Exception e)
+            {
+                
+
+            }
+            return _oPharmacies;
 
 
 

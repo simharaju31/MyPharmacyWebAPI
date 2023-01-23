@@ -8,6 +8,6 @@ namespace MyPharmacyWebAPI.IServices
 {
     public interface IPharmacySearchService
     {
-        List<Pharmacy> PharmacySearch(string characteristics, string type, string city, string state, int pincode);
+        List<Pharmacy> PharmacySearch(string characteristics, string type, string city, string state, string pincode);
     }
 }

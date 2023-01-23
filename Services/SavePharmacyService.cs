@@ -25,19 +25,26 @@ namespace MyPharmacyWebAPI.Services
 
             parameters.Add("@memberId", savePharmacy.Members_memberId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@pharmaId", savePharmacy.Pharmacy_pharmaId, DbType.String, ParameterDirection.Input);
-
-            using (System.Data.IDbConnection con = new System.Data.SqlClient.SqlConnection(Global.ConnectionString))
+            try
             {
-                if (con.State == System.Data.ConnectionState.Closed) con.Open();
-                var oSavedPharmacy = con.Query<SavePharmacy>(procedureName, parameters, commandType: CommandType.StoredProcedure).ToList();
-                
-                if (oSavedPharmacy != null && oSavedPharmacy.Count() > 0)
+                using (System.Data.IDbConnection con = new System.Data.SqlClient.SqlConnection(Global.ConnectionString))
                 {
-                    _oSavedPharmacy = oSavedPharmacy;
-                }
-                return _oSavedPharmacy;
+                    if (con.State == System.Data.ConnectionState.Closed) con.Open();
+                    var oSavedPharmacy = con.Query<SavePharmacy>(procedureName, parameters, commandType: CommandType.StoredProcedure).ToList();
 
+                    if (oSavedPharmacy != null && oSavedPharmacy.Count() > 0)
+                    {
+                        _oSavedPharmacy = oSavedPharmacy;
+                    }
+                    
+
+                }
             }
+            catch(Exception e)
+            {
+                return _oSavedPharmacy;
+            }
+            return _oSavedPharmacy;
         }
     }
 }
