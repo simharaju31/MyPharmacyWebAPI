@@ -23,7 +23,7 @@ namespace MyPharmacyWebAPI.Controllers
 
 
         [HttpGet]
-        public List<Pharmacy> Get(string characteristics,string type, string city,string state, int pincode)
+        public List<Pharmacy> Get(string characteristics,string type, string city,string state, string pincode)
         {
             //simharaju's task
 
