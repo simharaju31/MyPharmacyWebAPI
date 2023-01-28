@@ -50,6 +50,8 @@ namespace MyPharmacyWebAPI
             services.AddScoped<IPharmaTypeService, PharmaTypeService>();
             services.AddScoped<IPharmacySearchService, PharmacySearchService>();
             services.AddScoped<ISavePharmacyService, SavePharmacyService>();
+            services.AddScoped<ISavedPharmaciesService, SavedPharmaciesService>();
+            services.AddScoped<IRemoveSavedPharmaciesService, RemoveSavedPharmaciesService>();
 
 
             services.AddMvc();
